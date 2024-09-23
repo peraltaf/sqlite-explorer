@@ -27,16 +27,18 @@ const Query = () => {
   }
 
   const runQuery = async () => {
-    let file;
+    let res;
 
-    if (typeof dbFile === 'string') {
-      file = dbFile;
-    } else {
-      file = new FormData();
+    if (Object.keys(dbFile).length > 0) {
+      const file = new FormData();
       file.append('backupFile', dbFile as File);
+      res = await ExecuteQuery(file, query);
+    } else {
+      res = await fetch('/api/sample_query', {
+        method: 'POST', body: JSON.stringify({ 'query': query })
+      });
+      res = await res.json();
     }
-
-    const res = await ExecuteQuery(file, query);
     setResults(res);
   }
 

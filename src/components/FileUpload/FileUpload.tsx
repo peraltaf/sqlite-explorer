@@ -34,11 +34,9 @@ const FileUpload = () =>  {
   }
 
   const loadSample = async () => {
-    const fileLocation = `chinook.db`;
-    const res = await ParseFile(fileLocation);
-
-    setDbFile(fileLocation);
-    setDbInfo(res);
+    const res = await fetch('/api/sample_db');
+  
+    setDbInfo(await res.json());
   }
 
   const validateFile = (e:ChangeEvent<HTMLInputElement>) => {
