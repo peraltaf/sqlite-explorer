@@ -29,7 +29,7 @@ const FileUpload = () =>  {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const res = await ParseFile(formData);
-    setDbFile((e.target as any)[0].files[0]);
+    setDbFile(formData.get('backupFile') as File)
     setDbInfo(res);
   }
 

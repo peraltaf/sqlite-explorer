@@ -5,7 +5,7 @@ import CopyButton from '@/components/CopyButton/CopyButton';
 type Props = {
   code: string;
   language: string;
-  style: any;
+  style: { [key: string]: React.CSSProperties };
 };
 
 const CodeBlock = ({ code, language, style }: Props) => {
