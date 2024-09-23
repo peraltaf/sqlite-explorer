@@ -46,7 +46,7 @@ const Main = () => {
             aria-label='Reset'
             className='ml-2'
             size='icon'
-            variant='ghost'
+            variant='outline'
             onClick={reset}
           >
             <UndoDot />

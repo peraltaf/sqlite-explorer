@@ -55,7 +55,7 @@ const FileUpload = () =>  {
     <>
       {
         !dbInfo && <div className='flex justify-center items-center flex-1 p-4 rounded-lg'>
-          <div>
+          <div className='md:w-1/2 lg:w-1/4'>
             <p className='pb-8'>Start by selecting a local SQLite3 database file. 
               <br />
               <br />
