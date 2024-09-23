@@ -45,7 +45,7 @@ const Tables = () => {
   }, [dbInfo]);
 
   return (
-    <>
+    <div className='mt-4'>
       <Label>Select a table</Label>
       <Select
         value={selectedTable}
@@ -130,7 +130,7 @@ const Tables = () => {
         </Table>
       </div>
       }
-    </>
+    </div>
   );
 }
 

@@ -45,7 +45,7 @@ const Query = () => {
   return (
     <>
       <div className='grid w-full gap-2'>
-        <Label className='text-lg pt-4'>Query</Label>
+        <Label className='text-lg pt-2'>Query</Label>
         <Textarea
           onChange={updateQuery}
           placeholder='Enter your SQL statement...'
@@ -57,27 +57,31 @@ const Query = () => {
         >Run Query</Button>
       </div>
 
-      <Separator className='mt-4 mb-4' />
+      {
+        results.length > 0 && <>
+          <Separator className='mt-4 mb-4' />
 
-      <Label className='text-lg'>Results</Label>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            {results.length > 0 && Object.keys(results[0]).map((d,i) => (
-              <TableHead key={i}>{d}</TableHead>
-            ))}
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {results.length > 0 && results.map((d,i) => (
-            <TableRow key={`table-row-${i}`}>
-            { Object.entries(d).map((x,n) => 
-              <TableCell key={`table-row-${i}-${n}`}>{x[1]}</TableCell>
-            )}
-          </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          <Label className='text-lg'>Results</Label>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                {Object.keys(results[0]).map((d,i) => (
+                  <TableHead key={i}>{d}</TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {results.map((d,i) => (
+                <TableRow key={`table-row-${i}`}>
+                { Object.entries(d).map((x,n) => 
+                  <TableCell key={`table-row-${i}-${n}`}>{x[1]}</TableCell>
+                )}
+              </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </>
+      }
     </>
   );
 }
