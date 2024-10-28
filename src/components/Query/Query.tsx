@@ -15,6 +15,7 @@ import { Separator } from '../ui/separator';
 import { Textarea } from '../ui/textarea';
 import { Button } from '../ui/button';
 import ExecuteQuery from '@/app/actions/query_db';
+import { ScrollArea } from '../ui/scroll-area';
 
 
 const Query = () => {
@@ -29,9 +30,9 @@ const Query = () => {
   const runQuery = async () => {
     let res;
 
-    if (Object.keys(dbFile).length > 0) {
+    if (dbFile?.name) {
       const file = new FormData();
-      file.append('backupFile', dbFile as File);
+      file.append('backupFile', (dbFile as unknown) as File);
       res = await ExecuteQuery(file, query);
     } else {
       res = await fetch('/api/sample_query', {
@@ -62,24 +63,26 @@ const Query = () => {
           <Separator className='mt-4 mb-4' />
 
           <Label className='text-lg'>Results</Label>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                {Object.keys(results[0]).map((d,i) => (
-                  <TableHead key={i}>{d}</TableHead>
+          <ScrollArea className='h-[350px]'>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  {Object.keys(results[0]).map((d,i) => (
+                    <TableHead key={i}>{d}</TableHead>
+                  ))}
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {results.map((d,i) => (
+                  <TableRow key={`table-row-${i}`}>
+                  { Object.entries(d).map((x,n) => 
+                    <TableCell key={`table-row-${i}-${n}`}>{x[1]}</TableCell>
+                  )}
+                </TableRow>
                 ))}
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {results.map((d,i) => (
-                <TableRow key={`table-row-${i}`}>
-                { Object.entries(d).map((x,n) => 
-                  <TableCell key={`table-row-${i}-${n}`}>{x[1]}</TableCell>
-                )}
-              </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableBody>
+            </Table>
+          </ScrollArea>
         </>
       }
     </>

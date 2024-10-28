@@ -1,4 +1,4 @@
-import { DBInfo } from '@/types/types';
+import { DBInfo, dbFile } from '@/types/types';
 import { create } from 'zustand';
 
 interface dbInfoStoreType {
@@ -11,15 +11,14 @@ const dbInfoStore = create<dbInfoStoreType>((set) => ({
   setDbInfo: (newInfo:DBInfo | undefined) => set(({ dbInfo: newInfo }))
 }));
 
-
 interface dbFileStoreType {
-  dbFile: object | string,
-  setDbFile: (newFile: object | string) => void
+  dbFile: dbFile | null,
+  setDbFile: (newFile: dbFile | null) => void
 }
 
 const dbFileStore = create<dbFileStoreType>((set) => ({
-  dbFile: {},
-  setDbFile: (newFile:object | string) => set(({ dbFile: newFile }))
+  dbFile: null,
+  setDbFile: (newFile: dbFile | null) => set(({ dbFile: newFile }))
 }));
 
 interface activeTabType {

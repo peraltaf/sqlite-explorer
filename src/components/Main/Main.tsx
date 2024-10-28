@@ -7,7 +7,7 @@ import {
   TabsTrigger
 } from '@/components/ui/tabs';
 import FileUpload from '../FileUpload/FileUpload';
-import { dbInfoStore, tabStore } from '@/context/store';
+import { dbFileStore, dbInfoStore, tabStore } from '@/context/store';
 import Tables from '../Tables/Tables';
 import Query from '../Query/Query';
 import { Button } from '../ui/button';
@@ -16,6 +16,7 @@ import { UndoDot } from 'lucide-react';
 
 
 const Main = () => {
+  const { setDbFile } = dbFileStore();
   const { dbInfo, setDbInfo } = dbInfoStore();
   const { activeTab, setActiveTab } = tabStore();
 
@@ -23,6 +24,7 @@ const Main = () => {
 
   const reset = () => {
     setDbInfo(undefined);
+    setDbFile(null);
     setActiveTab('overview');
   }
 

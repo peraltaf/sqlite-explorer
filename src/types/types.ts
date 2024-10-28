@@ -29,4 +29,13 @@ interface DBInfo {
   data: TableType[]
 }
 
-export type { DBMetadata, DBInfo, TableType, Datum }
+interface dbFile {
+  lastModified: number
+  lastModifiedDate: Date
+  name: string
+  size: number
+  type: string
+  webkitRelativePath: string
+}
+
+export type { DBMetadata, DBInfo, TableType, Datum, dbFile }
