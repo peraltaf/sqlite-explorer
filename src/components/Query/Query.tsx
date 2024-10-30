@@ -46,7 +46,7 @@ const Query = () => {
   return (
     <>
       <div className='grid w-full gap-2'>
-        <Label className='text-lg pt-2'>Query</Label>
+        <Label className='text-lg pt-2'>Query <small>(Read Only)</small></Label>
         <Textarea
           onChange={updateQuery}
           placeholder='Enter your SQL statement...'
