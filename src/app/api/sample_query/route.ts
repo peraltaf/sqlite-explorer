@@ -11,16 +11,27 @@ export const POST = async (req:NextRequest) => {
       dbPath,
       sqlite3.OPEN_READONLY,
       (err) => {
-        if (err) console.error(err.message);
+        if (err) {
+          console.error('error: ', err.message);
+          return;
+        }
         console.log('Connected to the profile database.');
       }
     );
 
     const res = new Promise((resolve,reject) => 
-      db.all(query, (err, rows) =>
-        err ? reject(err) : resolve(rows)
-      )
+      db.all(query, (err, rows) => {
+        // err ? reject(err) : resolve(rows)
+        if (err) {
+          console.log('err: ', err);
+          reject(err);
+        } else {
+          resolve(rows);
+        }
+      })
     );
+
+    db.close();
 
     return NextResponse.json(await res);
   } catch (error) {
